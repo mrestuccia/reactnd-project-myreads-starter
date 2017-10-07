@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ShelfSelector from './ShelfSelector';
 
 var Book = ({ book, categories, moveBook }) => {
-
-  if (book === undefined) return;
 
   var divStyle = {
     width: 128,
@@ -28,6 +27,10 @@ var Book = ({ book, categories, moveBook }) => {
       </div>
     </li>
   );
+}
+
+Book.PropTypes = {
+  book: PropTypes.object.isRequired
 }
 
 export default Book;

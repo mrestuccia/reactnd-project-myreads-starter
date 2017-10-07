@@ -9,23 +9,36 @@ import Book from './Book';
 class Search extends Component {
   state = {
     query: '',
-    books: []
+    searchBooks: []
   }
 
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
 
     BooksAPI.search(this.state.query)
-      .then(books => {
-        this.setState({ books: books });
+      .then(searchBooks => {
+
+        // Merge results with the parent book state
+        var books = [];
+
+        if (searchBooks !== undefined) {
+          books = searchBooks.map(book => {
+            var findBook = this.props.books.find((userBook) => (userBook.id === book.id))
+            if (findBook) {
+              book.shelf = findBook.shelf;
+            }
+            return book;
+          });
+        }
+
+        this.setState({ searchBooks: books });
       });
 
   }
 
   render() {
 
-    const { books } = this.state;
-
+    const { searchBooks } = this.state;
     const { categories, moveBook } = this.props;
 
     return (
@@ -39,16 +52,15 @@ class Search extends Component {
               value={this.state.query}
               onChange={(event) => this.updateQuery(event.target.value)}
             />
-
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
 
             {
-              (!books || books.error || books.length === 0) ?
+              (!searchBooks || searchBooks.error || searchBooks.length === 0) ?
                 'No results' :
-                books.map((book, idx) => (
+                searchBooks.map((book, idx) => (
                   <Book
                     key={idx}
                     book={book}

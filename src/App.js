@@ -14,17 +14,22 @@ import Search from './Search';
 
 
 class App extends React.Component {
-  state = {
-    books: [],
-    categories: [
+
+
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      books: []
+    };
+
+    this.categories = [
       { shelf: 'currentlyReading', title: 'Currently Reading' },
       { shelf: 'wantToRead', title: 'Want to Read' },
       { shelf: 'read', title: 'Read' }
-    ]
+    ];
   }
-
-  // Binding
-  moveBook = this.moveBook.bind(this);
 
   componentDidMount() {
     // Get all the books from API
@@ -34,18 +39,17 @@ class App extends React.Component {
   }
 
   // Actions
-  moveBook(book, target) {
-
+  moveBook = (book, target) => {
     if (book.shelf === target) return;
 
-    BooksAPI.update(book, target)
-      .then((res) => {
-        return BooksAPI.getAll();
-      })
-      .then((books) => {
+    BooksAPI.update(book, target).then((res) => {
+      BooksAPI.getAll().then((books) => {
         this.setState({ books: books })
       });
+    })
   }
+    
+
 
   render() {
     return (
@@ -53,15 +57,16 @@ class App extends React.Component {
 
         <Route exact path='/' render={() => (
           <Books
-            categories={this.state.categories}
+            categories={this.categories}
             books={this.state.books}
             moveBook={this.moveBook}
           />
         )} />
 
         <Route path='/search' render={() => (
-          <Search 
-            categories={this.state.categories}
+          <Search
+            categories={this.categories}
+            books={this.state.books}
             moveBook={this.moveBook}
           />
         )} />
