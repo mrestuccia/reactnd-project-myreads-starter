@@ -7,9 +7,13 @@ import Book from './Book';
 
 
 class Search extends Component {
-  state = {
-    query: '',
-    searchBooks: []
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      query: '',
+      searchBooks: []
+    }
   }
 
   updateQuery = (query) => {
@@ -37,7 +41,6 @@ class Search extends Component {
   }
 
   render() {
-
     const { searchBooks } = this.state;
     const { categories, moveBook } = this.props;
 
