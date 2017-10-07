@@ -2,11 +2,9 @@ import React from 'react';
 
 var ShelfSelector = ({ categories, book, moveBook }) => {
 
-  console.log('self->',book.shelf);
-  
   return (
     <div className="book-shelf-changer">
-      <select defaultValue={book.shelf||'none'} onChange={(event)=>moveBook(book, event.target.value)}>
+      <select defaultValue={book.shelf || 'none'} onChange={(event) => moveBook(book, event.target.value)}>
         <option value="none" disabled>Move to...</option>
         {
           categories.map((category, idx) => {

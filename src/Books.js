@@ -16,13 +16,13 @@ var Books = ({ categories, books, moveBook }) => {
           {categories.map((category, idx) => {
             var sectionBooks = books.filter((book) => book.shelf === category.shelf);
             return (
-              <Bookshelf 
-                key={idx} 
-                title={category.title} 
-                books={sectionBooks} 
-                categories={categories} 
-                moveBook = {moveBook}
-                />);
+              <Bookshelf
+                key={idx}
+                title={category.title}
+                books={sectionBooks}
+                categories={categories}
+                moveBook={moveBook}
+              />);
           })};
           </div>
       </div>

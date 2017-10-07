@@ -25,13 +25,8 @@ class Search extends Component {
   render() {
 
     const { books } = this.state;
-    var showingBooks = [];
 
     const { categories, moveBook } = this.props;
-
-    console.log('books search-->', books);
-    
-
 
     return (
       <div className="search-books">
@@ -49,18 +44,18 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          
+
             {
-              (!books || books.error || books.length === 0)?
-              'No results':
-              books.map((book, idx) => (
-                <Book
-                  key = { idx }
-                  book = { book }
-                  categories = {categories}
-                  moveBook = { moveBook }
-                />
-              ))
+              (!books || books.error || books.length === 0) ?
+                'No results' :
+                books.map((book, idx) => (
+                  <Book
+                    key={idx}
+                    book={book}
+                    categories={categories}
+                    moveBook={moveBook}
+                  />
+                ))
             }
           </ol>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, history } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 // API connector
 import * as BooksAPI from './BooksAPI';
@@ -35,7 +35,7 @@ class App extends React.Component {
 
   // Actions
   moveBook(book, target) {
-    if (target === 'none') return;
+
     if (book.shelf === target) return;
 
     BooksAPI.update(book, target)
