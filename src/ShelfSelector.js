@@ -4,8 +4,8 @@ var ShelfSelector = ({ categories, book, moveBook }) => {
 
   return (
     <div className="book-shelf-changer">
-      <select defaultValue={book.shelf || 'none'} onChange={(event) => moveBook(book, event.target.value)}>
-        <option value="none" disabled>Move to...</option>
+      <select value={book.shelf || 'none'} onChange={(event) => moveBook(book, event.target.value)}>
+        <option value="" disabled>Move to...</option>
         {
           categories.map((category, idx) => {
             return (
