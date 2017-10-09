@@ -30,6 +30,8 @@ class Search extends Component {
             var findBook = this.props.books.find((userBook) => (userBook.id === book.id))
             if (findBook) {
               book.shelf = findBook.shelf;
+            } else {
+              book.shelf = 'none'
             }
             return book;
           });
